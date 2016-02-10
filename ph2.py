@@ -227,7 +227,11 @@ class PhRun(object):
         resp = self.ph.conn.request(
             u'GET', self.ph.URLS[u'getdata'].format(self.run_token), dict(api_key=self.ph.api_key, format=out_format))
         data = resp.data.decode(u'utf-8')
-        jdata = json.loads(data)[u'results']
+        jdata = json.loads(data)
+        try:
+            jdata = jdata[u'results']
+        except KeyError:
+            pass
         self.data = jdata
         return jdata
 
@@ -257,7 +261,11 @@ class PhRun(object):
         resp = self.ph.conn.request(
             u'GET', self.ph.URLS[u'getdata'].format(self.run_token), dict(api_key=self.ph.api_key, format=out_format))
         data = resp.data.decode(u'utf-8')
-        jdata = json.loads(data)[u'results']
+        jdata = json.loads(data)
+        try:
+            jdata = jdata[u'results']
+        except KeyError:
+            pass
         self.data = jdata
         return jdata
 
